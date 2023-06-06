@@ -29,9 +29,6 @@ class SmsServiceProvider extends ServiceProvider
             ],
             'sms'
         );
-        $this->commands([
-            SmsPublishCommand::class,
-        ]);
     }
 
     /**
@@ -41,9 +38,7 @@ class SmsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            self::$packagePath . '/config/sms.php', 'sms'
-        );
+
     }
 
 }
