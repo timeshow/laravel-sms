@@ -29,6 +29,9 @@ class SmsServiceProvider extends ServiceProvider
             ],
             'sms'
         );
+        $this->commands([
+            SmsPublishCommand::class,
+        ]);
     }
 
     /**
