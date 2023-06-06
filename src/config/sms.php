@@ -33,8 +33,8 @@ return [
     |--------------------------------------------------------------------------
     */
     'map' => [
-        'aliyun' => \Tzsk\Sms\Drivers\Sns::class,
-        'juhe' => \Tzsk\Sms\Drivers\Textlocal::class,
+        'aliyun' => \TimeShow\Sms\Drivers\Aliyun::class,
+        'juhe' => \TimeShow\Sms\Drivers\JuHe::class,
     ],
 
 
