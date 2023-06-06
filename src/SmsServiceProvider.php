@@ -25,7 +25,7 @@ class SmsServiceProvider extends ServiceProvider
 
         $this->publishes(
             [
-                self::$packagePath . '/../../config/sms.php' => config_path('sms.php'),
+                self::$packagePath . '/config/sms.php' => config_path('sms.php'),
             ],
             'sms'
         );
@@ -42,7 +42,7 @@ class SmsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../../config/sms.php', 'sms'
+            self::$packagePath . '/config/sms.php', 'sms'
         );
     }
 
