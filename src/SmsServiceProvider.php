@@ -38,7 +38,19 @@ class SmsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton('sms', function () {
+            return new Manager($this->app);
+        });
+    }
 
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['sms'];
     }
 
 }

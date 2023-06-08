@@ -6,6 +6,8 @@ return [
     |--------------------------------------------------------------------------
     */
     'default' => env('SMS_DRIVER', 'juhe'),
+    'fallback' => env('SMS_FALLBACK', 'aliyun'),
+    'signature' => env('SMS_SIGNATURE', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -13,29 +15,23 @@ return [
     |--------------------------------------------------------------------------
     */
     'drivers' => [
-        // Install: composer require aws/aws-sdk-php
+        // Install: composer require
         'aliyun' => [
-            'url' => 'dysmsapi.aliyuncs.com',
-            'access_secret_id' => 'Your Access Key',
-            'access_secret_key' => 'Your Secret Key',
+            'appKey' => env('ALIYUN_APP_KEY', 'Your Access Key'),
+            'appSecret' => env('ALIYUN_APP_SECRET', 'Your Secret Key'),
+            'templateId' => env('ALIYUN_TEMPLATE_ID', 0),
+            'driverFile' => 'ALiYun',
         ],
         'juhe' => [
-            'url' => 'http://v.juhe.cn/vercodesms/submitTpl.php?',
-            'signature' => 'Your Username',
-            'key' => 'Your Key',
-            'tplcode' => 'Your template id', // sender
+            'key' => env('JUHE_KEY', 'Your Access Key'),
+            'templateId' => env('JUHE_TEMPLATE_ID', 0),
+            'driverFile' => 'JuHe',
+        ],
+        'yunpian' => [
+            'apiKey' => env('YUNPIAN_API_KEY'),
+            'templateContent' => env('YUNPIAN_TEMPLATE_CONTENT'),
+            'driverFile' => 'YunPian',
         ],
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Class Maps
-    |--------------------------------------------------------------------------
-    */
-    'map' => [
-        'aliyun' => \TimeShow\Sms\Drivers\Aliyun::class,
-        'juhe' => \TimeShow\Sms\Drivers\JuHe::class,
-    ],
-
 
 ];

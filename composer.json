@@ -9,7 +9,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "TimeShow\\Sms\\": "src/"
+            "TimeShow\\Sms\\": "src_del/"
         }
     },
     "authors": [
