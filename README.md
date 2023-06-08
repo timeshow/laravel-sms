@@ -124,14 +124,39 @@ $smsDriver = Sms::driver('yunpian');
 ```php
 $sms->setSignature('your_signature');
 $sms->setContent($content);
-$sms->setContentByVerifyCode();
+$sms->setContentByVerifyCode(20);  //your code {verifyCode} {time} Minutes
 $sms->makeStr();
-$sms->makeCode();
+$sms->makeCode(6);
 $sms->setTemplateId(1);
 
+$smsDriver->setTemplateVar($templateVar);
 $smsDriver->setTemplateVar($templateVar, true);
 
 $smsDriver->send($mobile);
 $smsDriver->send($mobile, false);
 ```
 
+## Example
+```php
+$sms = Sms::driver();
+$content = 'Your verification code is {verifyCode}, Valid for {time} minutes';  //设置短信内容
+$sms->setContent($content);
+$result = $sms->send($mobile);
+
+//Or
+$sms = Sms::driver();
+$sms->setTemplateId(123456);
+$code = $sms->makeCode(6);
+$sms->setContent('#code#='.$code);
+$result = $sms->send($mobile, true);
+
+//Or
+$sms->setContentByVerifyCode(20);
+$result = $sms->send($mobile);
+```
+
+## Security
+If you discover any security related issues, please email 397975896@qq.com instead of using the issue tracker.
+
+## License
+The MIT License (MIT). Please see License File for more information.
