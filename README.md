@@ -1,4 +1,4 @@
-~~# Laravel SMS
+## Laravel SMS
 
 This is a Laravel Package for SMS Gateway Integration. Now Sending SMS is easy.
 
