@@ -5,8 +5,8 @@ return [
     | Default Driver
     |--------------------------------------------------------------------------
     */
-    'default' => env('SMS_DRIVER', 'juhe'),
-    'fallback' => env('SMS_FALLBACK', 'aliyun'),
+    'default' => env('SMS_DRIVER', 'aliyun'),
+    'fallback' => env('SMS_FALLBACK', 'juhe'),
     'signature' => env('SMS_SIGNATURE', ''),
 
     /*

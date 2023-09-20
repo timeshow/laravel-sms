@@ -47,24 +47,24 @@ Configure(.env)
 ```php
 
 //default driver
-SMS_DEFAULT=juhe
+SMS_DEFAULT=aliyun
 
 //fallback driver
-SMS_FALLBACK=aliyun
+SMS_FALLBACK=juhe
 
-//default signature
-SMS_SIGNNAME=sms
+//default signature  (Important: The signature should be enclosed in {})
+SMS_SIGNATURE={sms}
 
 
 ALIYUN_APP_KEY=your-appkey
 ALIYUN_APP_SECRET=your-appsecret
-ALIYUN_TEMPLATE_ID=your-templates-id
+ALIYUN_TEMPLATE_ID=your-templates-id  //Value：SMS_12345678
 
 JUHE_KEY=your-key
-JUHE_TEMPLATE_ID=your-templates-id
+JUHE_TEMPLATE_ID=your-templates-id  //Value：123456
 
 YUNPIAN_API_KEY=your-appkey
-YUNPIAN_TEMPLATE_CONTENT=your-template-content
+YUNPIAN_TEMPLATE_CONTENT=your-template-content  //Value：您的验证码是{verifyCode}，有效期为{time}分钟，请尽快验证
 ```
 
 Then fill the credentials for that gateway in the drivers array.
@@ -75,8 +75,8 @@ Then fill the credentials for that gateway in the drivers array.
 | Default Driver
 |--------------------------------------------------------------------------
 */
-'default' => env('SMS_DRIVER', 'juhe'),
-'fallback' => env('SMS_FALLBACK', 'aliyun'),
+'default' => env('SMS_DRIVER', 'aliyun'),
+'fallback' => env('SMS_FALLBACK', 'juhe'),
 'signature' => env('SMS_SIGNATURE', ''),
 
 /*
@@ -122,37 +122,68 @@ $smsDriver = Sms::driver('yunpian');
 ## Usage
 
 ```php
+$sms = Sms::driver();
+$sms->setTemplateId(123456);
 $sms->setSignature('your_signature');
 $sms->setContent($content);
-$sms->setContentByVerifyCode(20);  //your code {verifyCode} {time} Minutes
-$sms->makeStr();
-$sms->makeCode(6);
-$sms->setTemplateId(1);
+$sms->setContentByVerifyCode(20);  //Your verification code is {verifyCode}, valid for 20 minutes
+$sms->makeStr();   // Generate a 16 bit default random string
+$sms->makeCode(6);   // 100000~999999  1000~9999  10000000~99999999
+$sms->makeRandom();  // 100000~999999
 
-$smsDriver->setTemplateVar($templateVar);
-$smsDriver->setTemplateVar($templateVar, true);
+$templateVar = ['code' => $verifyCode];   // ['code' => '110101', 'time' =>'10']
+$sms->setTemplateVar($templateVar);
+$sms->setTemplateVar($templateVar, true);
 
-$smsDriver->send($mobile);
-$smsDriver->send($mobile, false);
+$sms->send($mobile);
+$sms->send($mobile, false);
 ```
 
 ## Example
 ```php
+// Custom
 $sms = Sms::driver();
-$content = 'Your verification code is {verifyCode}, Valid for {time} minutes';  //设置短信内容
+$default = config('sms.default');
+$templateId = config('sms.drivers.' . $default . '.templateId');
+$sms->setTemplateId($templateId);
+$content = 'Your verification code is {verifyCode}, Valid for {time} minutes';
 $sms->setContent($content);
 $result = $sms->send($mobile);
 
-//Or
+//Or JuHe
 $sms = Sms::driver();
-$sms->setTemplateId(123456);
+$default = config('sms.default');
+$templateId = config('sms.drivers.' . $default . '.templateId');
+$sms->setTemplateId($templateId);
 $code = $sms->makeCode(6);
 $sms->setContent('#code#='.$code);
 $result = $sms->send($mobile, true);
 
-//Or
+//Or ALiYun
+$sms = Sms::driver();
+$default = config('sms.default');
+$templateId = config('sms.drivers.' . $default . '.templateId');
+$sms->setTemplateId($templateId);
+$code = $sms->makeCode(6);
+$templateVar = ['code' => $code];
+$sms->setTemplateVar($templateVar, true);
+$result = $sms->send($mobile, true);
+
+//Or YunPian
+$sms = Sms::driver();
+$templateVar = ['yzm' => 'verifyCode'];
+$smsDriver->setTemplateVar($templateVar, true);
 $sms->setContentByVerifyCode(20);
 $result = $sms->send($mobile);
+
+//Or Set Content By Custom
+$sms = Sms::driver();
+$sms->setSignature('SignName');
+$content = '{name},Your account is logged in from another location. If it was not for you, please change the password in a timely manner';  //content
+$templateVar = ['name' => 'you name']; 
+$smsDriver->setContent($content);
+$smsDriver->setContentByCustomVar($templateVar);
+//Value：you name,Your account is logged in from another location. If it was not for you, please change the password in a timely manner
 ```
 
 ## Security

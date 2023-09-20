@@ -81,9 +81,9 @@ class YunPian extends Driver
                 json_decode($httpResponse['jsonData'], true),
                 ['count', 'fee', 'sid', 'mobile', 'unit']
             );
-            $result = array_merge(['verifyCode' => $this->verifyCode], $result);
+            $result = array_merge(['code' => 0, 'time' => time(), 'verifyCode' => $this->verifyCode], $result);
         } else {
-            $result = ['code' => time(), 'msg' => $httpResponse['error']];
+            $result = ['code' => 1, 'time' => time(), 'message' => $httpResponse['error']];
         }
 
         return $result;

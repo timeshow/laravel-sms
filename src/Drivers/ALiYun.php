@@ -123,13 +123,13 @@ class ALiYun extends Driver
         if (empty($httpResponse['error'])) {
             $response = json_decode($httpResponse['jsonData'], true);
             if ($response['Code'] == 'OK') {
-                $result = ['code' => 0, 'msg' => '发送成功', 'verifyCode' => $this->verifyCode];
+                $result = ['code' => 0, 'time' => time(), 'message' => '发送成功', 'verifyCode' => $this->verifyCode];
             } else {
-                $result = ['code' => time(), 'msg' => $response['Code']];
+                $result = ['code' => 1, 'time' => time(), 'message' => $response['Message']];
             }
             unset($response);
         } else {
-            $result = ['code' => time(), 'msg' => $httpResponse['error']];
+            $result = ['code' => -1, 'time' => time(), 'message' => $httpResponse['error']];
         }
 
         return $result;

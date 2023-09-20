@@ -99,19 +99,19 @@ class JuHe extends Driver
     protected function transformerResponse($response)
     {
         if (!$response) {
-            return ['status' => false,'time' => time(), 'msg' => "请求异常"];
+            return ['code' => -1,'time' => time(), 'message' => "请求异常"];
         }
         $result = json_decode($response, true);
         if (!$result) {
-            return ['status' => false,'time' => time(), 'msg' => "请求异常"];
+            return ['code' => 1, 'time' => time(), 'message' => "请求解析异常"];
         }
         $errorCode = $result['error_code'];
         if ($errorCode === 0) {
             $data = $result['result'];
-            $result = ['status' => true, 'time' => time(), 'msg' => "操作成功", 'data' => $data];
+            $result = ['code' => $errorCode, 'time' => time(), 'message' => "操作成功", 'data' => $data];
         } else {
             // 请求异常
-            $result = ['status' => true, 'time' => time(), 'msg' => "请求异常", 'data' => "请求异常:{$errorCode}_{$result["reason"]}"];
+            $result = ['code' => $errorCode, 'time' => time(), 'message' => $result["reason"], 'data' => "请求异常:{$errorCode}_{$result["reason"]}"];
         }
 
         return $result;
