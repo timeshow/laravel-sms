@@ -6,6 +6,7 @@ List of supported gateways:
 - [Juhe](https://www.juhe.cn/)
 - [Aliyun](https://www.aliyun.com/product/sms)
 - [YunPian](https://www.yunpian.com/)
+- [QQPian](https://cloud.tencent.com/product/sms)
 
 ## Install
 
