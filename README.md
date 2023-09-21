@@ -110,13 +110,13 @@ use it like this
 
 ```php
 //default
-$smsDriver = Sms::driver();
+$sms = Sms::driver();
 //fallback
-$smsDriver = Sms::driver('fallback');
+$sms = Sms::driver('fallback');
 //other options
-$smsDriver = Sms::driver('juhe');
-$smsDriver = Sms::driver('aliyun');
-$smsDriver = Sms::driver('yunpian');
+$sms = Sms::driver('juhe');
+$sms = Sms::driver('aliyun');
+$sms = Sms::driver('yunpian');
 ```
 
 ## Usage
