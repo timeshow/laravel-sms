@@ -29,7 +29,7 @@ class YunPian extends Driver
     {
         $url = $this->host . $this->singleSendUrl;
 
-        $postText = "【{$this->signature}】" . $this->content;
+        $postText = "【{$this->signName}】" . $this->content;
 
         $postData = [
             'text' => $postText,
