@@ -28,9 +28,15 @@ return [
             'driverFile' => 'JuHe',
         ],
         'yunpian' => [
-            'apiKey' => env('YUNPIAN_API_KEY'),
-            'templateContent' => env('YUNPIAN_TEMPLATE_CONTENT'),
+            'apiKey' => env('YUNPIAN_API_KEY', 'Your Api Key'),
+            'templateContent' => env('YUNPIAN_TEMPLATE_CONTENT', 'Your Template Content'),
             'driverFile' => 'YunPian',
+        ],
+        'qqyun' => [
+            'appId' => env('QQYUN_APP_ID', 'Your App Id'),
+            'appKey' => env('QQYUN_APP_KEY', 'Your App Key'),
+            'templateId' => env('QQYUN_TEMPLATE_ID', 0),
+            'executableFile' => 'QQYun',
         ],
     ],
 

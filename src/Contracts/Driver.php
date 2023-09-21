@@ -131,7 +131,7 @@ abstract class Driver
      */
     public function setSignName($signName = null)
     {
-        $this->$signName = trim($signName) ?: trim(config('sms.signName'), '{}');
+        $this->signName = trim($signName) ?: trim(config('sms.signName'), '{}');
     }
 
     /**

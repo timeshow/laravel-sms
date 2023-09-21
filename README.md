@@ -65,6 +65,11 @@ JUHE_TEMPLATE_ID=your-templates-id  //Value：123456
 
 YUNPIAN_API_KEY=your-appkey
 YUNPIAN_TEMPLATE_CONTENT=your-template-content  //Value：您的验证码是{verifyCode}，有效期为{time}分钟，请尽快验证
+
+QQYUN_APP_ID=your-appid
+QQYUN_APP_KEY=your-appkey
+QQYUN_TEMPLATE_ID=your-templates-id //Value：12345
+
 ```
 
 Then fill the credentials for that gateway in the drivers array.
@@ -102,6 +107,12 @@ Then fill the credentials for that gateway in the drivers array.
         'templateContent' => env('YUNPIAN_TEMPLATE_CONTENT'),
         'driverFile' => 'YunPian',
     ],
+    'qqyun' => [
+        'appId' => env('QQYUN_APP_ID', 'Your App Id'),
+        'appKey' => env('QQYUN_APP_KEY', 'Your App Key'),
+        'templateId' => env('QQYUN_TEMPLATE_ID', 0),
+        'executableFile' => 'QQYun',
+    ],
 ],
 ```
 
@@ -137,6 +148,19 @@ $sms->setTemplateVar($templateVar, true);
 
 $sms->send($mobile);
 $sms->send($mobile, false);
+```
+
+## Basic Usage
+```php
+// JuHe
+$sms->setContent('#code#=' . $code);
+
+// ALiYun & QQYun
+$templateVar = ['code' => $code];
+
+// YunPian
+$sms->setContentByVerifyCode();
+
 ```
 
 ## Example
