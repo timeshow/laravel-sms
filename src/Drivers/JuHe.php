@@ -23,7 +23,7 @@ class JuHe extends Driver
     {
         $this->key = Arr::pull($this->config, 'key');
         $this->templateId = Arr::pull($this->config, 'templateId');
-        $this->setSignature();
+        $this->setSignName();
     }
 
     public function send($mobile, $send = true)

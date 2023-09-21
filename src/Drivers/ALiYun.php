@@ -26,7 +26,7 @@ class ALiYun extends Driver
     {
         $this->appKey = Arr::pull($this->config, 'appKey');
         $this->appSecret = Arr::pull($this->config, 'appSecret');
-        $this->setSignature();
+        $this->setSignName();
         $this->setTemplateId(Arr::pull($this->config, 'templateId'));
     }
 
@@ -59,7 +59,7 @@ class ALiYun extends Driver
         $requestParams = array(
             'TemplateParam' => json_encode($this->templateVar),
             'PhoneNumbers' => $mobile,
-            'Signature' => $this->signature,
+            'SignName' => $this->signName,
             'TemplateCode' => $this->templateId
         );
 

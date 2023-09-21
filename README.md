@@ -52,8 +52,8 @@ SMS_DEFAULT=aliyun
 //fallback driver
 SMS_FALLBACK=juhe
 
-//default signature  (Important: The signature should be enclosed in {})
-SMS_SIGNATURE={sms}
+//default signName  (Important: The signName should be enclosed in {})
+SMS_SIGNNAME={sms}
 
 
 ALIYUN_APP_KEY=your-appkey
@@ -77,7 +77,7 @@ Then fill the credentials for that gateway in the drivers array.
 */
 'default' => env('SMS_DRIVER', 'aliyun'),
 'fallback' => env('SMS_FALLBACK', 'juhe'),
-'signature' => env('SMS_SIGNATURE', ''),
+'signName' => env('SMS_SIGNNAME', ''),
 
 /*
 |--------------------------------------------------------------------------
@@ -124,7 +124,7 @@ $sms = Sms::driver('yunpian');
 ```php
 $sms = Sms::driver();
 $sms->setTemplateId(123456);
-$sms->setSignature('your_signature');
+$sms->setSignName('your_signName');
 $sms->setContent($content);
 $sms->setContentByVerifyCode(20);  //Your verification code is {verifyCode}, valid for 20 minutes
 $sms->makeStr();   // Generate a 16 bit default random string
@@ -172,17 +172,17 @@ $result = $sms->send($mobile, true);
 //Or YunPian
 $sms = Sms::driver();
 $templateVar = ['yzm' => 'verifyCode'];
-$smsDriver->setTemplateVar($templateVar, true);
+$sms->setTemplateVar($templateVar, true);
 $sms->setContentByVerifyCode(20);
 $result = $sms->send($mobile);
 
 //Or Set Content By Custom
 $sms = Sms::driver();
-$sms->setSignature('SignName');
+$sms->setSignName('your_signName');
 $content = '{name},Your account is logged in from another location. If it was not for you, please change the password in a timely manner';  //content
 $templateVar = ['name' => 'you name']; 
-$smsDriver->setContent($content);
-$smsDriver->setContentByCustomVar($templateVar);
+$sms->setContent($content);
+$sms->setContentByCustomVar($templateVar);
 //Value：you name,Your account is logged in from another location. If it was not for you, please change the password in a timely manner
 ```
 

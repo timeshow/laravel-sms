@@ -22,7 +22,7 @@ class YunPian extends Driver
     protected function transformConfig()
     {
         $this->apiKey = Arr::pull($this->config, 'apiKey');
-        $this->setSignature();
+        $this->setSignName();
     }
 
     public function send($mobile, $send = true)

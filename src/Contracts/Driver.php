@@ -4,7 +4,7 @@ namespace TimeShow\Sms\Contracts;
 abstract class Driver
 {
 
-    protected $signature;
+    protected $signName;
     protected $templateId;
     protected $content;
     protected $templateVar = [];
@@ -127,19 +127,19 @@ abstract class Driver
     }
 
     /**
-     * @param string $signature
+     * @param string $signName
      */
-    public function setSignature($signature = null)
+    public function setSignName($signName = null)
     {
-        $this->signature = trim($signature) ?: trim(config('sms.signature'), '{}');
+        $this->$signName = trim($signName) ?: trim(config('sms.signName'), '{}');
     }
 
     /**
      * @return string
      */
-    public function getSignature()
+    public function getSignName()
     {
-        return $this->signature;
+        return $this->signName;
     }
 
     /**

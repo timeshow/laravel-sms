@@ -7,7 +7,7 @@ return [
     */
     'default' => env('SMS_DRIVER', 'aliyun'),
     'fallback' => env('SMS_FALLBACK', 'juhe'),
-    'signature' => env('SMS_SIGNATURE', ''),
+    'signName' => env('SMS_SIGNNAME', ''),
 
     /*
     |--------------------------------------------------------------------------
