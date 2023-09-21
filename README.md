@@ -209,6 +209,17 @@ $templateVar = ['name' => 'you name'];
 $sms->setContent($content);
 $sms->setContentByCustomVar($templateVar);
 //Value：you name,Your account is logged in from another location. If it was not for you, please change the password in a timely manner
+
+//Or QQYun
+$sms = Sms::driver();
+$default = config('sms.default');
+$templateId = config('sms.drivers.' . $default . '.templateId');
+$sms->setTemplateId($templateId);
+$code = $sms->makeCode(6);
+$templateVar = ['code' => $code];
+$sms->setTemplateVar($templateVar, true);
+$result = $sms->send($mobile, true);
+
 ```
 
 ## Security
