@@ -37,6 +37,7 @@ return [
             'appKey' => env('QQYUN_APP_KEY', 'Your App Key'),
             'templateId' => env('QQYUN_TEMPLATE_ID', 0),
             'executableFile' => 'QQYun',
+            'driverFile' => 'QQYun',
         ],
     ],
 
